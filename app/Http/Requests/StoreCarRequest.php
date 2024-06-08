@@ -23,11 +23,11 @@ class StoreCarRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'registration_number' => 'required_if:is_registered,true|integer',
+            'registration_number' => 'required_if:is_registered,true|max:255',
             'is_registered' => 'boolean',
             'parts' => 'array',
-            'parts.*.serial_number' => 'required|integer',
-            'parts.*.name'=> 'required',
+            'parts.*.serial_number' => 'required|string|max:255',
+            'parts.*.name'=> 'required|string|max:255',
         ];
     }
 }

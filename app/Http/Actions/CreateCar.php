@@ -15,6 +15,6 @@ class CreateCar
             $car->parts()->create($part);
         }
 
-        return $car->load('parts');
+        return $car;
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Car;
+use App\Models\Part;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,8 +22,15 @@ class CarFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'registration_number' => $this->faker->unique()->randomNumber(),
+            'registration_number' => $this->faker->uuid,
             'is_registered' => $this->faker->boolean,
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Car $car) {
+            $car->parts()->saveMany(Part::factory()->count(rand(1, 5))->make());
+        });
     }
 }

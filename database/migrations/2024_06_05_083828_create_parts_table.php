@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Car;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +14,8 @@ return new class extends Migration {
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('serial_number')->unique();
-            $table->foreignIdFor(\App\Models\Car::class, 'car_id');
+            $table->string('serial_number');
+            $table->foreignIdFor(Car::class, 'car_id')->nullable();
             $table->timestamps();
         });
     }
